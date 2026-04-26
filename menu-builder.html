@@ -1,0 +1,1244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Build Your Menu – Sri Annapurneshwari Caterers</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet"/>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --green-dark: #3a5c2e;
+  --green-mid: #4e7a3c;
+  --green-light: #6b9a54;
+  --gold: #c9882a;
+  --gold-light: #e0a84a;
+  --cream: #f5f0e8;
+  --cream-dark: #ede5d2;
+  --text-dark: #2c2010;
+  --text-mid: #4a3a20;
+  --text-light: #7a6a50;
+  --white: #fff;
+  --shadow: 0 2px 12px rgba(44,32,16,0.10);
+  --heading-font-size: 2rem;
+  --content-font-size: 0.9rem;
+}
+
+body {
+  font-family: 'Lato', sans-serif;
+  background: var(--cream);
+  color: var(--text-dark);
+  overflow-x: hidden;
+}
+
+/* ── PAGE HEADER ── */
+.page-header {
+  background: linear-gradient(135deg, var(--green-dark) 0%, var(--green-mid) 60%, #5a8c42 100%);
+  padding: 28px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 4px 24px rgba(30,55,20,0.35);
+}
+
+.header-left { display: flex; align-items: center; gap: 20px; }
+
+.back-btn {
+  background: rgba(255,255,255,0.15);
+  border: 1.5px solid rgba(255,255,255,0.4);
+  color: #fff;
+  padding: 8px 18px;
+  border-radius: 4px;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.back-btn:hover { background: rgba(255,255,255,0.25); transform: translateX(-2px); }
+
+.header-title-block h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.7rem;
+  font-weight: 600;
+  color: #fff;
+  line-height: 1.1;
+}
+.header-title-block p {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1rem;
+  color: #c8ddb8;
+}
+
+.cart-btn {
+  position: relative;
+  background: var(--gold);
+  border: none;
+  color: #fff;
+  padding: 10px 22px 10px 16px;
+  border-radius: 4px;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.15s;
+}
+.cart-btn:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.22); }
+.cart-badge {
+  background: #fff;
+  color: var(--gold);
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  transition: transform 0.2s;
+}
+.cart-badge.bump { animation: badge-bump 0.3s ease; }
+@keyframes badge-bump { 0%,100%{transform:scale(1)} 50%{transform:scale(1.4)} }
+
+/* ── LAYOUT ── */
+.layout {
+  display: flex;
+  gap: 0;
+  min-height: calc(100vh - 82px);
+}
+
+/* ── SIDEBAR NAV ── */
+.sidebar {
+  width: 220px;
+  flex-shrink: 0;
+  background: #fff;
+  border-right: 1.5px solid var(--cream-dark);
+  position: sticky;
+  top: 82px;
+  height: calc(100vh - 82px);
+  overflow-y: auto;
+  padding: 20px 0;
+}
+.sidebar::-webkit-scrollbar { width: 4px; }
+.sidebar::-webkit-scrollbar-thumb { background: var(--cream-dark); border-radius: 2px; }
+
+.sidebar-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--text-light);
+  text-transform: uppercase;
+  padding: 0 18px 10px;
+  border-bottom: 1px solid var(--cream-dark);
+  margin-bottom: 8px;
+}
+
+.sidebar a {
+  display: block;
+  padding: 8px 18px;
+  font-size: 0.82rem;
+  color: var(--text-mid);
+  text-decoration: none;
+  border-left: 3px solid transparent;
+  transition: all 0.15s;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.sidebar a:hover, .sidebar a.active {
+  color: var(--green-dark);
+  border-left-color: var(--gold);
+  background: var(--cream);
+  font-weight: 700;
+}
+
+/* ── MENU CONTENT ── */
+.menu-content {
+  flex: 1;
+  padding: 40px 44px;
+  overflow-y: auto;
+}
+
+.category-section { margin-bottom: 52px; }
+
+.category-heading {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.55rem;
+  font-weight: 600;
+  color: var(--green-dark);
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.category-heading::before { content: '✦'; font-size: 0.75rem; color: var(--gold); }
+.category-heading::after { content: ''; flex: 1; height: 1.5px; background: linear-gradient(to right, var(--cream-dark), transparent); }
+
+.category-count {
+  font-family: 'Lato', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 400;
+  color: var(--text-light);
+  margin-bottom: 20px;
+  font-style: italic;
+}
+
+.items-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.item-card {
+  background: #fff;
+  border: 1.5px solid var(--cream-dark);
+  border-radius: 8px;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  transition: box-shadow 0.2s, border-color 0.2s, transform 0.15s;
+}
+.item-card:hover {
+  box-shadow: var(--shadow);
+  border-color: #c8ddb8;
+  transform: translateY(-1px);
+}
+.item-card.added {
+  background: #f0f7ec;
+  border-color: var(--green-light);
+}
+
+.item-name {
+  font-size: 0.84rem;
+  color: var(--text-dark);
+  font-weight: 400;
+  line-height: 1.3;
+  flex: 1;
+}
+
+.add-btn {
+  background: var(--green-dark);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 5px 12px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: background 0.2s, transform 0.15s;
+}
+.add-btn:hover { background: var(--green-mid); transform: scale(1.05); }
+.add-btn.added-state {
+  background: #7ab860;
+  cursor: default;
+}
+.add-btn.added-state:hover { transform: none; }
+
+/* ── STICKY MOBILE CART ── */
+.mobile-cart-bar {
+  display: none;
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  background: var(--green-dark);
+  padding: 14px 24px;
+  z-index: 200;
+  box-shadow: 0 -4px 18px rgba(30,55,20,0.25);
+}
+.mobile-cart-bar button {
+  width: 100%;
+  background: var(--gold);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 13px;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+/* ══════════════════════════════════
+   CART PAGE
+══════════════════════════════════ */
+.cart-page {
+  display: none;
+  min-height: calc(100vh - 82px);
+  background: var(--cream);
+  padding: 48px 60px;
+}
+.cart-page.active { display: block; }
+.menu-layout { display: flex; }
+.menu-layout.hidden { display: none; }
+
+.cart-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 36px;
+  padding-bottom: 18px;
+  border-bottom: 2px solid var(--cream-dark);
+}
+.cart-header h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: var(--heading-font-size);
+  font-weight: 600;
+  color: var(--green-dark);
+}
+.cart-sub {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--text-light);
+  margin-top: 4px;
+}
+
+.cart-back-btn {
+  background: transparent;
+  border: 2px solid var(--green-dark);
+  color: var(--green-dark);
+  padding: 9px 20px;
+  border-radius: 4px;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: background 0.2s, color 0.2s;
+}
+.cart-back-btn:hover { background: var(--green-dark); color: #fff; }
+
+.cart-body {
+  display: block;
+}
+
+.cart-form {
+  display: grid;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.cart-form h4 {
+  font-family: 'Playfair Display', serif;
+  font-size: var(--heading-font-size);
+  font-weight: 600;
+  color: var(--green-dark);
+  margin-bottom: 12px;
+}
+
+.cart-form label {
+  display: block;
+  font-size: var(--content-font-size);
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 6px;
+}
+
+.cart-form input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1.5px solid #d8d3c7;
+  border-radius: 10px;
+  background: #fff;
+  color: var(--text-dark);
+  font-family: 'Lato', sans-serif;
+  font-size: var(--content-font-size);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.cart-form input:focus {
+  outline: none;
+  border-color: var(--green-mid);
+  box-shadow: 0 0 0 4px rgba(78,122,60,0.12);
+}
+
+.cart-form .input-help {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--text-light);
+  margin-top: -8px;
+}
+
+.add-link-btn {
+  background: var(--green-mid);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+  margin-top: 8px;
+}
+.add-link-btn:hover { background: var(--green-dark); transform: translateY(-1px); }
+
+.done-btn {
+  background: var(--gold);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+  margin-top: 8px;
+}
+.done-btn:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+.link-input-container {
+  margin-top: 12px;
+  animation: fadeIn 0.3s ease;
+}
+
+.link-badge {
+  margin-top: 8px;
+  font-size: 0.85rem;
+  color: var(--green-dark);
+  font-weight: 600;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Drag list */
+.drag-list { list-style: none; }
+
+.drag-item {
+  background: #fff;
+  border: 1.5px solid var(--cream-dark);
+  border-radius: 8px;
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 10px;
+  cursor: grab;
+  transition: box-shadow 0.2s, border-color 0.2s, opacity 0.2s;
+  user-select: none;
+}
+.drag-item:active { cursor: grabbing; }
+.drag-item.dragging {
+  box-shadow: 0 8px 28px rgba(44,32,16,0.18);
+  border-color: var(--gold);
+  opacity: 0.85;
+  transform: rotate(1.5deg);
+}
+.drag-item.drag-over { border-color: var(--green-mid); background: #f0f7ec; }
+
+.drag-handle {
+  color: var(--text-light);
+  font-size: 1.1rem;
+  cursor: grab;
+  padding: 2px 4px;
+  flex-shrink: 0;
+}
+.drag-handle:active { cursor: grabbing; }
+
+.drag-num {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--cream);
+  border: 1.5px solid var(--cream-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--text-light);
+  flex-shrink: 0;
+}
+
+.drag-name {
+  flex: 1;
+  font-size: var(--content-font-size);
+  font-weight: 400;
+  color: var(--text-dark);
+}
+
+.drag-category {
+  font-size: 0.72rem;
+  color: var(--text-light);
+  background: var(--cream);
+  border-radius: 12px;
+  padding: 2px 8px;
+  font-style: italic;
+}
+
+.remove-btn {
+  background: none;
+  border: none;
+  color: #c0392b;
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 2px 4px;
+  border-radius: 4px;
+  transition: background 0.15s;
+  flex-shrink: 0;
+}
+.remove-btn:hover { background: #fdf0ee; }
+
+.empty-cart {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--text-light);
+}
+.empty-cart .icon { font-size: 3rem; margin-bottom: 16px; }
+.empty-cart p { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-style: italic; }
+
+/* Cart action panel */
+.cart-panel {
+  background: #fff;
+  border: 1.5px solid var(--cream-dark);
+  border-radius: 18px;
+  padding: 28px 24px;
+  position: static;
+  top: auto;
+  box-shadow: var(--shadow);
+  margin-top: 32px;
+}
+
+.cart-panel h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: var(--heading-font-size);
+  font-weight: 600;
+  color: var(--green-dark);
+  margin-bottom: 6px;
+}
+.cart-panel .panel-sub {
+  font-size: var(--content-font-size);
+  color: var(--text-light);
+  margin-bottom: 24px;
+  font-style: italic;
+}
+
+.panel-stat {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--cream-dark);
+  font-size: var(--content-font-size);
+  color: var(--text-mid);
+}
+.panel-stat strong { color: var(--text-dark); font-weight: 700; }
+.panel-stat:last-of-type { border-bottom: none; margin-bottom: 20px; }
+
+.action-btn {
+  width: 100%;
+  padding: 13px;
+  border-radius: 6px;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  border: none;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.15s;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.action-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.15); }
+.action-btn:last-child { margin-bottom: 0; }
+
+.btn-whatsapp {
+  background: #25D366;
+  color: #fff;
+}
+.btn-whatsapp:hover { background: #1ebe5a; }
+
+.btn-pdf {
+  background: var(--gold);
+  color: #fff;
+}
+.btn-pdf:hover { background: var(--gold-light); }
+
+.btn-clear {
+  background: transparent;
+  border: 1.5px solid #c0392b;
+  color: #c0392b;
+  font-size: 0.8rem;
+  padding: 9px;
+}
+.btn-clear:hover { background: #fdf0ee; box-shadow: none; }
+
+/* ── DECORATIVE DIVIDER ── */
+.ornament {
+  text-align: center;
+  color: var(--gold);
+  opacity: 0.5;
+  font-size: 0.85rem;
+  letter-spacing: 8px;
+  margin: 10px 0 24px;
+}
+
+/* ── TOAST ── */
+.toast {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--green-dark);
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s, transform 0.3s;
+  z-index: 300;
+  white-space: nowrap;
+}
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1024px) {
+  .items-grid { grid-template-columns: repeat(2, 1fr); }
+  .cart-body { display: block; }
+  .cart-panel { position: static; }
+  .sidebar { display: none; }
+}
+
+@media (max-width: 700px) {
+  .page-header { padding: 18px 20px; }
+  .header-title-block h1 { font-size: 1.2rem; }
+  .header-title-block p { display: none; }
+  .menu-content { padding: 24px 16px; padding-bottom: 90px; }
+  .items-grid { grid-template-columns: 1fr; }
+  .cart-page { padding: 24px 16px; padding-bottom: 90px; }
+  .mobile-cart-bar { display: block; }
+  .cart-btn { display: none; }
+  .category-heading { font-size: 1.25rem; }
+}
+
+/* Print style for PDF-like look */
+@media print {
+  .page-header, .sidebar, .add-btn, .cart-btn, .mobile-cart-bar { display: none !important; }
+  .layout { display: block; }
+  .menu-content { padding: 0; }
+  .item-card { break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<header class="page-header">
+  <div class="header-left">
+    <a href="index.html" class="back-btn" onclick="return goBack()">← Back</a>
+    <div class="header-title-block">
+      <h1>Build Your Menu</h1>
+      <p>Sri Annapurneshwari Caterers — Select dishes for your event</p>
+    </div>
+  </div>
+  <button class="cart-btn" id="cartBtn" onclick="showCart()">
+    🛒 View Cart
+    <span class="cart-badge" id="cartBadge">0</span>
+  </button>
+</header>
+
+<!-- ── TOAST ── -->
+<div class="toast" id="toast"></div>
+
+<!-- ── MENU LAYOUT ── -->
+<div class="layout menu-layout" id="menuLayout">
+  <!-- Sidebar nav -->
+  <nav class="sidebar" id="sidebar">
+    <div class="sidebar-title">Categories</div>
+  </nav>
+
+  <!-- Menu content -->
+  <main class="menu-content" id="menuContent">
+    <!-- Dynamically populated -->
+  </main>
+</div>
+
+<!-- ── CART PAGE ── -->
+<div class="cart-page" id="cartPage">
+  <div class="cart-header">
+    <div>
+      <h2>Your Selected Menu</h2>
+      <div class="cart-sub">Drag to reorder · Click ✕ to remove</div>
+    </div>
+    <button class="cart-back-btn" onclick="showMenu()">← Back to Menu</button>
+  </div>
+
+  <div class="cart-body">
+    <div>
+      <ul class="drag-list" id="dragList">
+        <!-- Cart items -->
+      </ul>
+      <div class="empty-cart" id="emptyCart" style="display:none;">
+        <div class="icon">🍽️</div>
+        <p>Your menu is empty. Go back and add some dishes!</p>
+      </div>
+    </div>
+
+    <div class="cart-panel">
+      <h3>Menu Summary</h3>
+      <div class="panel-sub">Ready to share or download?</div>
+      <div class="ornament">✦ ✦ ✦</div>
+
+      <div class="panel-stat">
+        <span>Total items selected</span>
+        <strong id="totalCount">0</strong>
+      </div>
+      <div class="panel-stat">
+        <span>Categories covered</span>
+        <strong id="totalCats">0</strong>
+      </div>
+
+      <div class="cart-form">
+        <h4>Event & contact details</h4>
+        <label for="eventName">Name</label>
+        <input id="eventName" type="text" placeholder="Your name" />
+
+        <label for="eventPhone">Phone Number</label>
+        <input id="eventPhone" type="text" placeholder="Your number" />
+
+        <label for="eventLocation">Event Location</label>
+        <input id="eventLocation" type="text" placeholder="Enter venue address" />
+        <button class="add-link-btn" id="addLinkBtn">➕ Add Google Maps Link</button>
+        <div class="link-input-container" id="linkContainer" style="display:none;">
+          <label for="eventLink">Google Maps Link</label>
+          <input id="eventLink" type="text" placeholder="Paste Google Maps location link here" />
+          <button class="done-btn" id="doneBtn">Done</button>
+        </div>
+        <div class="link-badge" id="linkBadge" style="display:none;">📍 Location Link Added</div>
+
+        <label for="eventDate">Event Date</label>
+        <input id="eventDate" type="date" />
+
+        <label for="eventTime">Event Time</label>
+        <input id="eventTime" type="time" />
+      </div>
+
+      <button class="action-btn btn-whatsapp" onclick="sendWhatsApp()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        Send via WhatsApp
+      </button>
+
+      <button class="action-btn btn-pdf" onclick="generatePDF()">
+        📄 Generate PDF
+      </button>
+
+      <button class="action-btn btn-clear" onclick="clearCart()">
+        🗑 Clear All Items
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ── MOBILE CART BAR ── -->
+<div class="mobile-cart-bar">
+  <button onclick="showCart()">
+    🛒 View Cart
+    <span class="cart-badge" id="cartBadgeMobile">0</span>
+  </button>
+</div>
+
+<script>
+// ════════════════════════════════════════
+// MENU DATA – Complete catalog from PDFs
+// ════════════════════════════════════════
+const menuData = [
+  {
+    id: 'snacks',
+    name: 'Snacks (North & South)',
+    emoji: '🥙',
+    items: ['Kachori','Cutlet','Samosa','Harabara Kabab','Alu Tikki','Veg. Kabab','Alu Kabab','Paneer Tikka','Paneer Peshavari','Cheese Ball','Alu Bonda (Variety)','Mirchi Bajji','Bread Bonda','Pakoda (Variety)','Mangalore Bajji','Rava Vada','Ambode','Maddur Vada']
+  },
+  {
+    id: 'tindi',
+    name: 'Tindi (Breakfast Items)',
+    emoji: '🍽️',
+    items: ['Kotte Kadabu','Masala Idli','Mangalore Idli','Idli','Vada','Khara Bath','Shyavige Bath','Avalakki Bath','Khara Pongal','Tamil Pongal','Dosa (Variety)','Habe Kadabu (Kolakata)','Puri','Idiappam','Appam','Ottu Shyavige (Variety)']
+  },
+  {
+    id: 'tindi_sweet',
+    name: 'Sweet Tindi',
+    emoji: '🍮',
+    items: ['Kesari Bath','Avalakki Kesari Bath','Kashi Halwa','Carrot Halwa','Badam Halwa','Shaayana','Khajura Halwa','Alugedde Halwa','Sihi Pongal','Shyavige Kesari','Haal Bayi','Moong Dal Halwa','Banana Halwa','Sihi Kolakata','Anjura Halwa','Dry Fruit Halwa']
+  },
+  {
+    id: 'palya',
+    name: 'Palya (Dry Vegetable Sides)',
+    emoji: '🥦',
+    items: ['Beans Palya','Tondakai Palya','Karamani Palya','Alu Fry','Alu Finger Fry','Alu Chops','Suvarna Gadde Finger Fry','Suvarna Gadde Chops','Ennaygay','Cauliflower Corn Palya','Paneer with Alu Palya','Fruit with Paneer Palya','Fruits Palya','Capsicum with Dum Alu','Bende with Mushroom Palya','Corn with Mushroom Palya','Kalu Huli','Alasande Kalu Palya','Kabul Palya','Kadlebega Palya','Rajma Palya','Mixkalu Palya','Drumstick Gujju','Pineapple Gujju','Anjura with Lion Dates Gujju','Grape Gujju','Apple Gujju','Dalambe Gujju','Mix Fruit Gajju']
+  },
+  {
+    id: 'kosambari',
+    name: 'Kosambari (Salads)',
+    emoji: '🥗',
+    items: ['Molki Cosambari','Veg Cosambari','Dalimba Chepakai Cosambari','Corn Cosambari','Cucumber Cosambari','Carrot Cosambari','Dry Hesrabele Cosambari']
+  },
+  {
+    id: 'roti',
+    name: 'Rotis & Breads',
+    emoji: '🫓',
+    items: ['Soft Roti','Soft Naan','Thandoori Roti','Stuffed Roti (Variety)','Thava Naan','Tandoori Naan','Rumali Roti','Pudina Kulcha','Palak Rumali Roti','Jolada Roti','Pudina Parota (Variety)','Veg. Parota','Palak Poori','Masala Akki Roti','Butter Naan','Neeru Dosa','Appam Dosa','Rava Dosa','Kulcha','Baby Pudhina Kulcha','Butter Pudhina Kulcha','Stuffed Kulcha','Masala Kulcha','Dry Sindhi Kulcha','Veg Sindhi Kulcha','Cauliflower Kulcha','Garlic Kulcha','Butter Roti','Rumal Roti','Palak Rumal Roti','Pista Rumal Roti','Carrot Rumal Roti','Coriander Rumal Roti','Naan','Navarathna Naan','Singapore Naan','Carrot Naan','Corn Naan','Parota','Coran Parota','Mutter Parota','Kerala Parota','Potato and Dhal Parota','Chapathi','Kerala Chapathi','Puri','Palak Puri','Bathura','Akki Roti','Masala Akki Roti','Godhi Rotti','Jaladha Rotti','Methi Roti','Ragi Rotti','Ragi Ball']
+  },
+  {
+    id: 'rice',
+    name: 'Rice Items',
+    emoji: '🍚',
+    items: ['Veg Palav','Pudhina Palav','Menthya Palav','Peas Palav','Mushroom Palav','Corinder Rice','Pepper Rice','Capsicum Rice','Kaju Rice','Kaju and Peas Rice','Tomato Rice','Pista Rice','Badam Rice','Coconut Rice','Mango Rice','Lemon Rice','Ghee Rice / Chitranna','Mango Chitranna','Vangi Bath','Hasi Masala Vangibath','Bisi Bele Bath','Puliyogere','Pudhina Bath','Veg Dum Biriyani','Peas Dum Biriyani','Hydrabadi Biriyani','Shajani Biriyani','Mughalai Biriyani','Veg. Fried Rice','Mushroom Fried Rice','Schezwan Fried Rice','Paneer and Mushroom Fried Rice','Maxican Spicy Corn Rice','Maxican Fried Rice','Maxican Vegetable Rice','Pudhina Corn Rice','Methi Corn Rice','Palak Corn Rice','Jeera Fried Rice','Jeera Rice','Palak Rice','Veg Fried Rice with Noodles','Veg Hakka Noodles','Singapore Noodles','Curd Rice','White Rice','Malaysian Fried Rice','Singapore Fried Rice']
+  },
+  {
+    id: 'gravy',
+    name: 'Gravy',
+    emoji: '🫕',
+    items: ['North Indian Veg Gravy','Veg. Kollapuri','Veg. Hydarabad','Veg. Kadai','Veg. Malai Kurma','Veg. Kandhahar','Veg. Peppar Masala','Veg. Green Peas Curry','Veg. Shahi Kurma','Veg. Makhanwala','Veg. Capcicum Masala','Veg. Hariyali','Paneer & Palak Gravy','Paneer Sathi','Paneer Better Masala','Paneer Mutter Masala','Paneer Green Peas Curry','Paneer Shahi Kurma','Paneer Kadai','Paneer Malai Masala','Paneer Methi','Gujarathiwala','Paneer Do Payza','Paneer Gulchi','Paneer Pasand','Palak Paneer','Palak Mutter','Palak Harimirchi Saguvala','Palak Corn Masala','Dhal Gravy','Pancharathna Dhal','Masoori Dhal Panjabi Dhal','Yellow Dhaldhal Fry','Dhal Makhni','Dhal Maharani','Green Peas Masala','Mutter Gulchi','Rajma Masala','Channa Masala','Malai Mutter','Veg Saguwala','Methi Mali Mutter','Gobi & Alu Gravy','Alu Gobi','Alu Mutter','Alu Green Peas Curry','Alu Paneer Mushroom Carry','Alu Do Paysa','Alu Paneer Curry','Mashroom - Capsicum Gravy','Mashroom Masala','Mashroom Capsicum Curry','Mashroom Patato Curry','Mashroom Paneer','Mashroom Corn Curry','Mashroom with Gobi Curry','Bigon Burthakofta Gravy','Mashroom Kadai','Califlower Do Payasa','Mashroom Do Payasa','Veg Kofta','Mashroom Kofta','Paneer Kofta','Alu Kofta','Dhal Kofta','Special Gravy','Navarathana Kurma','Bygon Burtha','Bendi Masala','Kaju Capsicum Masala','Kaju Green Peas Masala']
+  },
+  {
+    id: 'payasa',
+    name: 'Payasas (Sweet Desserts)',
+    emoji: '🍯',
+    items: ['Paradi Payasa','Halasina Payasa','Khajura Payasa','Appe Payasa','Paal Payasa','Gasagase Payasa','Dry Fruit Payasa','Macaroni Payasa','Elaniru Payasa','Shyavige Payasa','Sabbakki Payasa','Godhi Payasa','Shyavige Payasa','Pal Payasa','Kesari Pal Payasa','Rava Payasa','Lichee Payasa','Sabbakki Jackfruit Payasa','Sabbakki Dry Fruit Payasa','Pastha Payasa','Godhi Kadi Lion Dates Payasa','Kadle Bele Anjura Payasa','Hesaru Bele Payasa']
+  },
+  {
+    id: 'huli',
+    name: 'Special Huli & Saaru',
+    emoji: '🍲',
+    items: ['Mangalore Sothekaayi Huli','Gulla Huli','Bole Huli','Sandige Huli','Thambula (Variety)','Mix Tarkari Huli','Mujjage Huli','Tarkari Kootu','Halsinakaayi Huli (Seasonal)','Kaalu + Alu + Badanekaayi Huli','Kodekanaal','Aviyal','Gojju Ambode','Kaayi Huli','Mahabharata','Pathrode Fry + Pudi','Jee Gujju Fry','Abbre Huli','Kokam Saaru','Thambula']
+  },
+  {
+    id: 'south_snacks',
+    name: 'South Indian Snacks',
+    emoji: '🧆',
+    items: ['Dahi Vada','Masala Vada','Alu Thair Vada','Uddina Vada','Medhu Vada','Rava Vada','Veg Vada','Bread Thairvada','Chattam Vada','Maddur Vada','Mangalore Vada','Banana Bhaji','Herakayi Bhajji','Masalavada Thairvada','Onion Bhajji','Tomato Bhajji','Onion Ring Bhajji','Capsicum Bhajji','Potato Bhajji','Sambar Onion Bhajji','Menasinakayi Bhajji','Mangalore Buns','Grill Sandwich','Bread Paneer Sandwich','Mangalore Bonda','Bonda Rasam','Alubonda','Veg Bonda','Onion Pakoda','Pudi Pakoda','Kaju Pakoda','Paneer Pakoda','Veg. Pakoda','Bread Sandwich']
+  },
+  {
+    id: 'chaats',
+    name: 'Chaats',
+    emoji: '🌮',
+    items: ['Masala Puri','Pani Puri','Bhel Puri','Sev Puri','Alu Puri','Tikka Puri','Pudhina Puri','Kathambri Puri','Karabeavu Puri','Dhahi Batata Puri','Nippat Masala','Boti Masala','Cutlet Chat','Samosa Chat','Kachori','Nai Burugalu']
+  },
+  {
+    id: 'ni_snacks',
+    name: 'North Indian & Chinese Snacks',
+    emoji: '🥟',
+    items: ['Thiranga Paneer','Crispy Paneer','Crispy Veg.','Golden Kabab','Ladies Finger Dry Fry','Gold Coin','Alu Meth Dry','Dhal Dokla','Kara Dokla','Baby Corn Palak Fry','Thurdhal Paneer Fry','Bendi Jaipuri Fry','Tava Sabji Fry','Veg Kolhapuri Fry','Mushroom Pepper Fry','Rajma Veg Fry','Veg. Bajji Fry','Gobi Tikka','Veg. Cutlet','Paneer Cutlet','Chilly Paneer','Alu 65','Paneer 65','Carrot 65','Gobi 65','Alu Kabab','Veg Kabab','Harebare Kabab','Spenich Manchoori','Veg. Manchoori','Baby Corn Manchoori','Corn Manchoori','Mashroom Chilly','Mashroom Manchoori','Paneer Chilly','Paneer Manchoori','Idly Chilly','Idly Manchoori']
+  },
+  {
+    id: 'dosa_idli',
+    name: 'Dosa & Idlis',
+    emoji: '🥞',
+    items: ['Baby Masala Dosa','Spring Dosa','Tomato Dosa','Onion Dosa','Paneer Dosa','Karabevu Dosa','Set Dosa','Kali Dosa','Sagu Masala Dosa','Carrot Dosa','Veg. Dosa','Hesaru Bele Dosa','Rava Dosa','Davanagere Benne Dosa','Ragi Dosa','Godhi Dosa','Cucumber Dosa','Savige Dosa','Idli','Carrot Idli','Bullet Idli','Kadubu Idli','Thatte Idli','Masala Idli','Rava Idli','Cup Idli','Ghee Idli','Salem Idli','Veg Idli','Dragon Shavige Bath','Avalakki Bath','Gojju Avalakki Bath','Mangalore Avalakki','Oth Shavege Bath','Pongal','MLA Pesarattu','Gunth Pongal','Madras Pongal','Karabath','Veg Karabath']
+  },
+  {
+    id: 'sweets_si',
+    name: 'South Indian Sweets',
+    emoji: '🍬',
+    items: ['Bele Holige','Kayee Holige','Sugar Holige','Karjura Holige','Kova Holige','Sajjige Holige','Kadale Bele Holige','Mango Kattali','Sonpappadi','Mysore Pak','Special Mysore Pak','Milk Mysore Pak','Peni Ladu','Chiroti Ladu','Chandrakala','Badam Puri','Badursha','Hot Gelebi','Jangeerdry Jamoon','Dry Fruit Ladu','Mothi Churladu','Vimoorthy','Doodh Peda','Kesari Peda','Malai Peda']
+  },
+  {
+    id: 'sweets_bengali',
+    name: 'South Indian & Bengali Sweets',
+    emoji: '🧁',
+    items: ['Bengali Liquid Sweets','Rasmalai','Angoor Malai','Maluppa Basundi','Basundi','Mango Malai','Angoor Rabadi','Gelebi Rabadi','Jamoon Rabadi','Lizze Rabadi','Rasagulla','Gulab Gamoon','Chandrahara','Malai Gulla','Apple Rasagulla','Lichi Rabadi','Vishnu Bhog','Kissan Bhog','Kamal Bhog','Kesari Bhog','Raj Bhog','Champakali','Cham-Cham','Lotus','Cova Orange','Mundri Cake','Agra Peta','Ajmeer Kalakand','Honey Dew','Dry Rsagulla','Dry Rasagulla 3 Sauce','Rasamaduri','Dry Fruit Sandwitch Sandwitch','Malai Sandwitch','Royal Sandwitch','Anjura Sandwitch','Apple Sandwitch','Chocolite Sandwitch','Kaju Sandwitch','Badami Anjura Burfy','Badam Burfy','Badam Kattali','Badami Roll','Badami Dry Fruit Burfy','Badami Samosa','Anjura Dry Fruit Burfy','Anjura Kattali','Anjura Roll','Pistha Paan','Pistha Flower','Pistha Roll','Pistha Anjura Burfy','Pistha Samosa','Kaju Burfy','Kaju Dulux','Kaju Hone Dew','Kaju Flower','Kaju Pappaye Roll','Kaju Kattali','Kaju Pineapple Kattali','Kaju Mango Kattali','Kaju Badam Kattali','Kaju Anjura Kattali','Kaju Dry Fruit Roll','Kaju Roll','Kaju Mango Roll','Kaju Paan','Kaju Samosa','Coconut Burfy','Dry Fruit Burfy','Ice Cream Burfy','Horlicks Burfy','Chocolate Burfy','Kova Burfy','Milk Burfy','Boondi Burfy','Vanilla Burfy','Badami Halwa','Kashi Halwa','Carrot Halwa','Moong Dhal Halwa','China Glass Halwa','Anjura Halwa','Anjura','Dry Fruit Halwa','Bombay Halwa']
+  },
+  {
+    id: 'banana_leaf',
+    name: 'Banana Leaf Meal',
+    emoji: '🍃',
+    items: ['Salt, Paisa','Pickle','2 Type Kosambari','2 Types Palya','Pineapple Gojju / Grapes Gojju','Chitranna / Bath','Sweets (Variety)','Bajji / Bonda','Rice + Thove + Ghee','Poori, Sagu (Variety)','Rasam','Sambar','Pappad','Curd','Beeda','Banana','Icecream','Thambula']
+  },
+  {
+    id: 'fruits_ice',
+    name: 'Fruits & Ice Creams',
+    emoji: '🍦',
+    items: ['Choice Fruits','Custard Fruits','Fruits Saad','Special Fruits','Vanila Fruits','Strawberry','Pista','Tuttifruity','Dry Fruit','Butter Scoth','Vanila Gulkun','Pnachamurtha','Gudbud','Cassata','Falooda','Honey Dew','Badam Roll','Pista Roll','Madka Kulfi','Kulfi','Top Notch','Hot Chocolate Fudge','Coffee Fudge','Hot Chocolate Cashew Fudge','Merry Mango','Orchard','Litchi Sundae','Planter\'s Punch','Hawaiian Cheer','Mango Waltz','Chocolate Fantasy','Chocolate Caramel','Trinity','Grass Hoppr','Scotsman','Schocking Current','Pineapple Sundae']
+  },
+  {
+    id: 'beeda',
+    name: 'Beeda',
+    emoji: '🌿',
+    items: ['Moghai Joodi','Choice Beeda','Banarasi Beeda','Culcutta Beeda','Madras Sweet','Karjura Beeda']
+  },
+  {
+    id: 'drinks',
+    name: 'Welcome Drinks',
+    emoji: '🥤',
+    items: ['Pineapple Juice','Mango Juice','Grape Juice','Water Melon Juice','Moosambi Juice','Orange Juice','Chikko Juice','Pudina Juice','Anarkali','Fruit Punch','Cocktail Juice','Sugarcane Juice','Coconut Juice','Rose Milk','Badam Milk','Vanilla Milk Shake','Pista Milk Shake','Lichee Milk Shake','Strawberry Milk Shake','Fountain Pepsi','Sweet Lassie','Jeljeera','Fruit Punch']
+  },
+  {
+    id: 'soups',
+    name: 'Soups',
+    emoji: '🍜',
+    items: ['Noodles Soup','Babycorn Soup','Palak Soup','Ladies Finger Soup','Onion Soup','Spinach Soup','Golden Glow Soup','Beans Soup','Tomato Soup','Sweetcorn Soup','Sweetcorn Veg Soup','Cream Soup','Veg Soup','Mushroom Soup','Hot and Sour Soup','Clear Veg Soup','Pinepale Soup','Bonda Soup','Spanish Soup','Green Peas Soup','Brokcalin Soup','Lemon Corindeal Soup']
+  }
+];
+
+// ════════════════════════════════════════
+// STATE
+// ════════════════════════════════════════
+const WHATSAPP_NUMBER = "919342227036";
+let cart = []; // {id, name, category}
+let dragSrc = null;
+let eventLink = '';
+
+// ════════════════════════════════════════
+// BUILD MENU
+// ════════════════════════════════════════
+function buildMenu() {
+  const sidebar = document.getElementById('sidebar');
+  const content = document.getElementById('menuContent');
+  sidebar.innerHTML = '<div class="sidebar-title">Categories</div>';
+  content.innerHTML = '';
+
+  menuData.forEach(cat => {
+    // Sidebar link
+    const a = document.createElement('a');
+    a.href = '#cat-' + cat.id;
+    a.textContent = cat.emoji + ' ' + cat.name;
+    a.title = cat.name;
+    sidebar.appendChild(a);
+
+    // Section
+    const sec = document.createElement('section');
+    sec.className = 'category-section';
+    sec.id = 'cat-' + cat.id;
+    sec.innerHTML = `
+      <h2 class="category-heading">${cat.emoji} ${cat.name}</h2>
+      <div class="category-count">${cat.items.length} items available</div>
+      <div class="items-grid" id="grid-${cat.id}"></div>
+    `;
+    content.appendChild(sec);
+
+    const grid = sec.querySelector('#grid-' + cat.id);
+    cat.items.forEach(item => {
+      const itemId = cat.id + '::' + item;
+      const card = document.createElement('div');
+      card.className = 'item-card' + (isInCart(itemId) ? ' added' : '');
+      card.id = 'card-' + itemId.replace(/[^a-z0-9]/gi, '_');
+      card.innerHTML = `
+        <span class="item-name">${item}</span>
+        <button class="add-btn ${isInCart(itemId) ? 'added-state' : ''}" 
+          onclick="toggleItem('${itemId}', '${item.replace(/'/g,"\\'")}', '${cat.name.replace(/'/g,"\\'")}', this, event)">
+          ${isInCart(itemId) ? 'Added ✓' : '+ Add'}
+        </button>
+      `;
+      grid.appendChild(card);
+    });
+  });
+}
+
+function isInCart(id) {
+  return cart.some(i => i.id === id);
+}
+
+function toggleItem(id, name, category, btn, e) {
+  e.stopPropagation();
+  if (isInCart(id)) return; // already added, no action (remove only from cart)
+  cart.push({ id, name, category });
+  btn.textContent = 'Added ✓';
+  btn.classList.add('added-state');
+  btn.closest('.item-card').classList.add('added');
+  updateCartCount();
+  showToast('✓ ' + name + ' added!');
+}
+
+// ════════════════════════════════════════
+// CART MANAGEMENT
+// ════════════════════════════════════════
+function updateCartCount() {
+  const n = cart.length;
+  document.getElementById('cartBadge').textContent = n;
+  document.getElementById('cartBadgeMobile').textContent = n;
+  const badge = document.getElementById('cartBadge');
+  badge.classList.remove('bump');
+  void badge.offsetWidth;
+  badge.classList.add('bump');
+}
+
+function showCart() {
+  document.getElementById('menuLayout').classList.add('hidden');
+  document.getElementById('cartPage').classList.add('active');
+  renderCart();
+  window.scrollTo(0,0);
+}
+
+function showMenu() {
+  document.getElementById('menuLayout').classList.remove('hidden');
+  document.getElementById('cartPage').classList.remove('active');
+  window.scrollTo(0,0);
+}
+
+function goBack() {
+  window.location.href = "index.html";
+  return false;
+}
+
+function renderCart() {
+  const list = document.getElementById('dragList');
+  const empty = document.getElementById('emptyCart');
+  document.getElementById('totalCount').textContent = cart.length;
+  const cats = [...new Set(cart.map(i => i.category))].length;
+  document.getElementById('totalCats').textContent = cats;
+
+  if (cart.length === 0) {
+    list.innerHTML = '';
+    empty.style.display = 'block';
+    return;
+  }
+  empty.style.display = 'none';
+  list.innerHTML = '';
+  cart.forEach((item, idx) => {
+    const li = document.createElement('li');
+    li.className = 'drag-item';
+    li.draggable = true;
+    li.dataset.index = idx;
+    li.innerHTML = `
+      <span class="drag-handle" title="Drag to reorder">⠿</span>
+      <span class="drag-num">${idx+1}</span>
+      <span class="drag-name">${item.name}</span>
+      <span class="drag-category">${item.category}</span>
+      <button class="remove-btn" onclick="removeItem('${item.id}', this)" title="Remove">✕</button>
+    `;
+    li.addEventListener('dragstart', onDragStart);
+    li.addEventListener('dragover', onDragOver);
+    li.addEventListener('drop', onDrop);
+    li.addEventListener('dragend', onDragEnd);
+    list.appendChild(li);
+  });
+}
+
+function removeItem(id, btn) {
+  const idx = cart.findIndex(i => i.id === id);
+  if (idx === -1) return;
+  cart.splice(idx, 1);
+  // Reset button in menu
+  const safeId = id.replace(/[^a-z0-9]/gi, '_');
+  const card = document.getElementById('card-' + safeId);
+  if (card) {
+    card.classList.remove('added');
+    const addBtn = card.querySelector('.add-btn');
+    if (addBtn) { addBtn.textContent = '+ Add'; addBtn.classList.remove('added-state'); }
+  }
+  updateCartCount();
+  renderCart();
+}
+
+function clearCart() {
+  if (!confirm('Remove all items from your menu?')) return;
+  cart = [];
+  updateCartCount();
+  buildMenu();
+  renderCart();
+}
+
+// ════════════════════════════════════════
+// DRAG & DROP
+// ════════════════════════════════════════
+function onDragStart(e) {
+  dragSrc = this;
+  this.classList.add('dragging');
+  e.dataTransfer.effectAllowed = 'move';
+  e.dataTransfer.setData('text/plain', this.dataset.index);
+}
+function onDragOver(e) {
+  e.preventDefault();
+  e.dataTransfer.dropEffect = 'move';
+  document.querySelectorAll('.drag-item').forEach(el => el.classList.remove('drag-over'));
+  if (this !== dragSrc) this.classList.add('drag-over');
+}
+function onDrop(e) {
+  e.stopPropagation();
+  if (this !== dragSrc) {
+    const from = parseInt(dragSrc.dataset.index);
+    const to = parseInt(this.dataset.index);
+    const moved = cart.splice(from, 1)[0];
+    cart.splice(to, 0, moved);
+    renderCart();
+  }
+}
+function onDragEnd() {
+  document.querySelectorAll('.drag-item').forEach(el => { el.classList.remove('dragging'); el.classList.remove('drag-over'); });
+}
+
+// ════════════════════════════════════════
+// WHATSAPP
+// ════════════════════════════════════════
+function sendWhatsApp() {
+  if (cart.length === 0) { showToast('⚠ Add items to your menu first!'); return; }
+
+  const eventName = document.getElementById('eventName').value.trim();
+  const eventPhone = document.getElementById('eventPhone').value.trim();
+  const eventLocation = document.getElementById('eventLocation').value.trim();
+  const eventDate = document.getElementById('eventDate').value;
+  const eventTime = document.getElementById('eventTime').value;
+
+  let mapsLink = eventLink;
+  if (!mapsLink && eventLocation) {
+    mapsLink = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(eventLocation)}`;
+  }
+
+  const itemList = cart.map((item, i) => `${i+1}. ${item.name} (${item.category})`).join('\n');
+  const msg = `Hello Sri Annapurneshwari Caterers,\n\nI would like to request the following catering menu:\n\nSelected Items:\n${itemList}\n\nEvent Details:\nLocation: ${eventLocation}${mapsLink ? `\nGoogle Maps Location: ${mapsLink}` : ''}\nDate: ${eventDate}\nTime: ${eventTime}\n\nContact:\nName: ${eventName}\nPhone: ${eventPhone}\n\nKindly confirm availability and pricing.\n\nThank you.`;
+  const encoded = encodeURIComponent(msg);
+  let url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encoded}`;
+  window.open(url, '_blank');
+}
+
+// ════════════════════════════════════════
+// EVENT LISTENERS FOR LOCATION LINK
+// ════════════════════════════════════════
+document.getElementById('addLinkBtn').addEventListener('click', function() {
+  document.getElementById('linkContainer').style.display = 'block';
+  document.getElementById('addLinkBtn').style.display = 'none';
+});
+
+document.getElementById('doneBtn').addEventListener('click', function() {
+  eventLink = document.getElementById('eventLink').value.trim();
+  document.getElementById('linkContainer').style.display = 'none';
+  document.getElementById('linkBadge').style.display = 'block';
+});
+
+// ════════════════════════════════════════
+// PDF GENERATION
+// ════════════════════════════════════════
+function generatePDF() {
+  if (cart.length === 0) { showToast('⚠ Add items to your menu first!'); return; }
+
+  const grouped = {};
+  cart.forEach(item => {
+    if (!grouped[item.category]) grouped[item.category] = [];
+    grouped[item.category].push(item.name);
+  });
+
+  const printWin = window.open('', '_blank', 'width=700,height=900');
+  const now = new Date().toLocaleDateString('en-IN', {day:'2-digit',month:'long',year:'numeric'});
+
+  let body = '';
+  Object.entries(grouped).forEach(([cat, items]) => {
+    body += `<div class="cat-block">
+      <div class="cat-title">${cat}</div>
+      <ul>${items.map(i => `<li>${i}</li>`).join('')}</ul>
+    </div>`;
+  });
+
+  printWin.document.write(`<!DOCTYPE html>
+<html><head><meta charset="UTF-8"/>
+<title>Catering Menu – Sri Annapurneshwari Caterers</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet"/>
+<style>
+  body { font-family:'Lato',sans-serif; color:#2c2010; margin:0; padding:40px 50px; background:#fff; }
+  .header { text-align:center; border-bottom:3px double #c9882a; padding-bottom:24px; margin-bottom:32px; }
+  .logo-text { font-family:'Playfair Display',serif; font-size:26px; font-weight:700; color:#3a5c2e; letter-spacing:1px; }
+  .tagline { font-size:13px; color:#7a6a50; margin-top:4px; font-style:italic; }
+  .meta { margin-top:8px; font-size:11px; color:#7a6a50; }
+  h2.section-head { font-family:'Playfair Display',serif; font-size:17px; color:#3a5c2e; margin:28px 0 8px; border-bottom:1px solid #ede5d2; padding-bottom:6px; }
+  .cat-block { margin-bottom:20px; page-break-inside:avoid; }
+  .cat-title { font-family:'Playfair Display',serif; font-size:13px; font-weight:600; color:#c9882a; margin-bottom:6px; letter-spacing:0.5px; }
+  ul { list-style:none; padding:0; margin:0; display:grid; grid-template-columns:1fr 1fr; gap:2px 20px; }
+  li { font-size:12px; padding:3px 0 3px 14px; border-bottom:1px dotted #ede5d2; position:relative; }
+  li::before { content:'✦'; position:absolute; left:0; color:#c9882a; font-size:8px; top:5px; }
+  .footer { text-align:center; margin-top:36px; padding-top:16px; border-top:2px solid #ede5d2; font-size:11px; color:#7a6a50; }
+  .summary { display:flex; gap:24px; justify-content:center; background:#f5f0e8; border-radius:6px; padding:12px 20px; margin-bottom:28px; font-size:12px; }
+  .summary span strong { font-weight:700; color:#3a5c2e; }
+  @media print { body{padding:20px 30px;} }
+</style>
+</head><body>
+<div class="header">
+  <div class="logo-text">✦ Sri Annapurneshwari Caterers ✦</div>
+  <div class="tagline">Catering for all Occasions — Bangalore</div>
+  <div class="tagline">Marriage · Office · Birthday · House Warming · Religious Functions</div>
+  <div class="meta">📞 93422 27036 &nbsp;|&nbsp; 94484 23029 &nbsp;|&nbsp; 99029 54265 &nbsp;|&nbsp; Date: ${now}</div>
+</div>
+<div class="summary">
+  <span>Total Items: <strong>${cart.length}</strong></span>
+  <span>Categories: <strong>${Object.keys(grouped).length}</strong></span>
+</div>
+<h2 class="section-head">Selected Menu Items</h2>
+${body}
+<div class="footer">
+  #60, 3rd Cross, 3rd Block, Near Sampath Store, Thyagaraja Nagar, Bangalore – 560 028<br/>
+  <em>Thank you for choosing Sri Annapurneshwari Caterers</em>
+</div>
+<script>window.onload=function(){window.print();}<\/script>
+</body></html>`);
+  printWin.document.close();
+  showToast('📄 PDF ready to print/save!');
+}
+
+// ════════════════════════════════════════
+// TOAST
+// ════════════════════════════════════════
+let toastTimer;
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+// ════════════════════════════════════════
+// ACTIVE SIDEBAR HIGHLIGHT
+// ════════════════════════════════════════
+function setupScrollSpy() {
+  const sections = document.querySelectorAll('.category-section');
+  const sideLinks = document.querySelectorAll('.sidebar a');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        sideLinks.forEach(a => a.classList.remove('active'));
+        const active = document.querySelector(`.sidebar a[href="#${entry.target.id}"]`);
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { threshold: 0.2, rootMargin: '-80px 0px -60% 0px' });
+  sections.forEach(s => observer.observe(s));
+}
+
+// ════════════════════════════════════════
+// INIT
+// ════════════════════════════════════════
+buildMenu();
+setupScrollSpy();
+</script>
+</body>
+</html>
